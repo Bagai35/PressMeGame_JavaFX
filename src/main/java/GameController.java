@@ -19,11 +19,15 @@ public class GameController implements Initializable {
     private Label scoreLabel;
     @FXML
     private Label bestScoreLabel;
+    @FXML
+    private Label timerLabel;
 
     private int score;
     private int bestScore;
+    private int timeLeft;
     private Random random;
-    private Timeline timeline;
+    private Timeline gameTimeline;
+    private Timeline timerTimeline;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -43,12 +47,23 @@ public class GameController implements Initializable {
         button.setLayoutY(random.nextDouble() * 400);
         button.setDisable(false);
 
-        if (timeline != null) {
-            timeline.stop();
+        if (gameTimeline != null) {
+            gameTimeline.stop();
         }
 
-        timeline = new Timeline(new KeyFrame(Duration.seconds(15), this::handleGameEnd));
-        timeline.play();
+        if (timerTimeline != null) {
+            timerTimeline.stop();
+        }
+
+        timeLeft = 15;
+        updateTimerLabel();
+
+        gameTimeline = new Timeline(new KeyFrame(Duration.seconds(15), this::handleGameEnd));
+        gameTimeline.play();
+
+        timerTimeline = new Timeline(new KeyFrame(Duration.seconds(1), this::updateTimer));
+        timerTimeline.setCycleCount(15);
+        timerTimeline.play();
     }
 
     private void handleButtonClick(ActionEvent event) {
@@ -69,7 +84,8 @@ public class GameController implements Initializable {
 
     private void handleGameEnd(ActionEvent event) {
         button.setDisable(true);
-        timeline.stop();
+        gameTimeline.stop();
+        timerTimeline.stop();
     }
 
     private void updateScoreLabel() {
@@ -78,5 +94,22 @@ public class GameController implements Initializable {
 
     private void updateBestScoreLabel() {
         bestScoreLabel.setText("Best Score: " + bestScore);
+    }
+
+    private void updateTimer(ActionEvent event) {
+        timeLeft--;
+        updateTimerLabel();
+
+        if (timeLeft == 0) {
+            timerTimeline.stop();
+        }
+    }
+
+    private void updateTimerLabel() {
+        timerLabel.setText("Time Left: " + timeLeft + " sec");
+    }
+    @FXML
+    private void startNewGame(ActionEvent event) {
+        startGame();
     }
 }

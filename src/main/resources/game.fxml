@@ -4,11 +4,12 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="500.0" prefWidth="500.0" styleClass="root" stylesheets="@main.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GameController">
+<AnchorPane prefHeight="500.0" prefWidth="500.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GameController">
     <children>
-        <Button fx:id="button" layoutX="186.0" layoutY="226.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="107.0" text="Press Me" />
-        <Label fx:id="scoreLabel" layoutX="14.0" layoutY="14.0" text="Score: 0" textFill="WHITE" />
-        <Label fx:id="highScoreLabel" layoutX="14.0" layoutY="31.0" text="High Score: 0" textFill="WHITE" />
-        <Button fx:id="newGameButton" layoutX="200.0" layoutY="225.0" mnemonicParsing="false" onAction="#startNewGame" text="New Game" visible="false" />
+        <Button fx:id="button" layoutX="216.0" layoutY="225.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="84.0" text="Press Me" />
+        <Label fx:id="scoreLabel" layoutX="3.0" prefHeight="27.0" prefWidth="84.0" text="Score: 0" textFill="WHITE" />
+        <Label fx:id="bestScoreLabel" layoutX="65.0" layoutY="-1.0" prefHeight="27.0" prefWidth="92.0" text="Best Score: 0" textFill="WHITE" />
+        <Label fx:id="timerLabel" layoutX="150.0" layoutY="-1.0" prefHeight="27.0" prefWidth="100.0" text="Time Left: 15 sec" textFill="WHITE" />
+        <Button layoutX="250.0" layoutY="1.0" mnemonicParsing="false" onAction="#startNewGame" prefHeight="27.0" prefWidth="78.0" text="New Game" />
     </children>
 </AnchorPane>
